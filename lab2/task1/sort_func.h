@@ -57,23 +57,46 @@ void shaker_sort(
     }
 }
 
-void rasheska_sort(
-    unsigned* arr,
-    unsigned const begin_idx,
-    unsigned const end_idx
-)
+void bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const step)
 {
-    for (unsigned step = end_idx - begin_idx; step > 0; step / 2)
+    for (int i = 0; i + step < size; i++)
     {
-        for (int i = begin_idx; i < end_idx; i += step)
+        for (int j = 0; j + step < size - i; j += step)
         {
-            for (int j = begin_idx; j < end_idx - i + begin_idx; j += step)
+            if (arr[j] > arr[j + step])
             {
-                if (arr[j] > arr[j + step])
-                {
-                    swap(arr[i], arr[i + step]);
-                }
+                swap(arr[j], arr[j + step]);
             }
         }
     }
+}
+
+void rascheska_sort(
+    unsigned* arr,
+    unsigned const size
+)
+{
+    for (unsigned step = size; step > 0; step /= 2)
+    {
+        bubble_sort_with_step(arr, size, step);
+    }
+}
+
+void insertion_sort_with_step(unsigned* arr, unsigned const size, unsigned step)
+{
+    for (int i = step; i < size; i++)
+    {
+        for (int j = i; j - step >= 0; j -= step)
+        {
+            if (arr[j] > arr[j - step])
+            {
+                swap(arr[j], arr[j - step]);
+            }
+        }
+    }
+}
+
+void shell_sort(unsigned* arr, unsigned const size, )
+{
+
 }
