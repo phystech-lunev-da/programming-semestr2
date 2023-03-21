@@ -73,6 +73,8 @@ long bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const st
             }
         }
     }
+
+    return permutations;
 }
 
 long rascheska_sort(

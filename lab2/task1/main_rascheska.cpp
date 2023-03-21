@@ -45,7 +45,7 @@ int main()
 
     std::ofstream data;
 
-    data.open("data_rascheska_time.csv");
+    data.open("data_rascheska.csv");
 
     if (!data.is_open())
     {
@@ -76,10 +76,10 @@ int main()
         auto end = std::chrono::steady_clock::now();
         auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 
-        data << size << " " << " " << time_span.count() << " " << permutations << std::endl;
+        data << size << " " << time_span.count() << " " << permutations << std::endl;
         if (size % 10 == 0)
         {
-            std::cout << size << " " << time_span.count() << std::endl;
+            std::cout << size << " " << time_span.count() << " " << permutations << std::endl;
         }
     }
 
