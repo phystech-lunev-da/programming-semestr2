@@ -1,34 +1,55 @@
 
-#include "search_test.h"
 #include "binary_search.h"
-#include <iostream>
-#include <ctime>
+#include "simple_search.h"
+#include <random>
+#include <cstdlib>
 #include <limits>
+#include <iostream>
+
+#include "generate_random_arrays.h"
 
 int main()
 {
     srand(time(NULL));
 
-    unsigned long size = 10000000l;
+    int min = -10;
+    int max = 10;
 
-    unsigned long* array = generate_random_sorted_array(size, 0, std::numeric_limits<unsigned long>::max());
-    
-    // for (unsigned long i = 0; i < 10; i++)
-    // {
-    //     std::cout << i << "\t";
-    // }
-    // std::cout << std::endl;
-    // for (unsigned long i = 0; i < 10; i++)
-    // {
-    //     std::cout << array[i] << "\t";
-    // }
-    // std::cout << std::endl;
+    int size = 10;
 
-    unsigned long pos = binary_search(array, size, std::numeric_limits<unsigned long>::max()/2);
+    int* array = generate_random_array(size, min, max);
 
-    std::cout << "5 on the position: " << pos << std::endl;
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << i << "\t";
+    }
+    std::cout << std::endl;
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << array[i] << "\t";
+    }
+    std::cout << std::endl;
 
-    delete[] array;
+    int key = rand() % (max - min + 1) + min;
+
+    std::cout << "key: " << key << std::endl;
+    std::cout << "simple search: " << simple_search(array, size, key) << std::endl;
+
+    std::sort(array, array + size);
+    std::cout << "Sorted: " << std::endl;
+
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << i << "\t";
+    }
+    std::cout << std::endl;
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << array[i] << "\t";
+    }
+    std::cout << std::endl;
+
+    std::cout << "binary search: " << binary_search(array, size, key) << std::endl;
 
     return 0;
 }

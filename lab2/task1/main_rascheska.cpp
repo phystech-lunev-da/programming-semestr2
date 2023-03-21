@@ -45,19 +45,20 @@ int main()
 
     std::ofstream data;
 
-    data.open("data_rascheska.csv");
+    data.open("data_rascheska_time.csv");
 
     if (!data.is_open())
     {
         return -1;
     }
 
-    data << "size" << " " << "time" << std::endl;
+    data << "size" << " " << "time" << " " << "perm" << std::endl;
 
     std::cout << "rascheska sort: " << std::endl;
 
     for (int size = 1; size < max_size; size++)
     {
+        long permutations;
         auto begin = std::chrono::steady_clock::now();
         for(unsigned cnt = 10000; cnt != 0 ; --cnt)
         {
@@ -68,14 +69,14 @@ int main()
                 array[i] = rand() % (max + min + 1) + min;
             }
         
-            rascheska_sort(array, size);
+            permutations = rascheska_sort(array, size);
             delete[] array;
             array = nullptr;
         }
         auto end = std::chrono::steady_clock::now();
         auto time_span = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin);
 
-        data << size << " " << time_span.count() << std::endl;
+        data << size << " " << " " << time_span.count() << " " << permutations << std::endl;
         if (size % 10 == 0)
         {
             std::cout << size << " " << time_span.count() << std::endl;

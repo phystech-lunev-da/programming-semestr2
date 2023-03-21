@@ -3,9 +3,9 @@
 
 // simple_search - функция поиска с линейным временем
 // возвращает индекс элемента или -1, если элемента нет.
-unsigned long simple_search(unsigned long* array, unsigned long size, unsigned long key)
+int simple_search(int* array, int size, int key)
 {
-    for (unsigned long i = 0; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
         if (array[i] == key)
         {

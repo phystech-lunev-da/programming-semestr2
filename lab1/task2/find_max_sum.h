@@ -4,17 +4,18 @@
 #include <cstdlib>
 #include <limits>
 #include <cstdio>
+#include <cstdlib>
 
 #include <chrono>
 
-long* max_sum_simple(long size, long* array, long key)
+int* max_sum_simple(int* array, int size, int key)
 {
-    long sum = std::numeric_limits<long>::min();
+    int sum = std::numeric_limits<int>::min();
 
-    long* result = new long[2]{-1, -1};
-    for (long i = 0; i < size; i++)
+    int* result = new int[2]{-1, -1};
+    for (int i = 0; i < size; i++)
     {
-        for (long j = i + 1; j < size; j++)
+        for (int j = i + 1; j < size; j++)
         {
             if (key == array[i] + array[j])
             {
@@ -28,38 +29,60 @@ long* max_sum_simple(long size, long* array, long key)
     return result;
 }
 
-long max_sum_linear(long size, long* array)
+int* max_sum_linear(int* arr, int size, int key)
 {
-    long total = 0, tail = 0;
+    int first_index = 0, last_index = size - 1;
+
+    while (first_index < last_index)
+    {
+        if (arr[first_index] + arr[last_index] > key)
+        {
+            last_index--;
+        }
+        else if (arr[first_index] + arr[last_index] < key)
+        {
+            first_index++;
+        }
+        else
+        {
+            int* result = new int[2];
+            result[0] = first_index;
+            result[1] = last_index;
+
+            return result;
+        }
+    }
+    return nullptr;
 }
 
-long* generate_random_array(long size, long min, long max)
+int* generate_random_array(int size, int min, int max)
 {
-    long * array = new long[size];
+    int * array = new int[size];
 
     for (long i = 0; i < size; i++)
     {
-        array[i] = rand() % (min + max + 1) + min;
+        array[i] = rand() % (-min + max + 1) + min;
     }
 
     return array;
 }
 
-long test(long size, long (*algorithm)(long, long*))
+int test(int size, int* (*algorithm)(int*, int, int))
 {
-    long start_cnt = 1000000;
-
-    long* array = generate_random_array(size, 1, 100000);
+    int start_cnt = 100;
+    const int min = 1;
+    const int max = 10000;
     
     auto begin = std::chrono::steady_clock::now();
-    for (long cnt = start_cnt; cnt >= 0; cnt--)
+    for (int cnt = start_cnt; cnt >= 0; cnt--)
     {
-        long result = algorithm(size, array);
+        int* array = generate_random_array(size, min, max);
+        int key = rand() % (2 * max - 2 * min + 1) + 2 * min;
+        int* result = algorithm(array, size, key);
+        delete[] result;
+        delete[] array;
     }
     auto end = std::chrono::steady_clock::now();
-    
-    delete[] array;
-
     auto time_span = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
 
     return time_span.count();

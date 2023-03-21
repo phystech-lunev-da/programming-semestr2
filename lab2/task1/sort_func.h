@@ -59,8 +59,9 @@ void shaker_sort(
     }
 }
 
-void bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const step)
+long bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const step)
 {
+    long permutations = 0;
     for (int i = 0; i + step < size; i++)
     {
         for (int j = 0; j + step < size - i; j += step)
@@ -68,20 +69,24 @@ void bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const st
             if (arr[j] > arr[j + step])
             {
                 swap(arr[j], arr[j + step]);
+                permutations++;
             }
         }
     }
 }
 
-void rascheska_sort(
+long rascheska_sort(
     unsigned* arr,
     unsigned const size
 )
 {
+    long permutations = 0;
     for (unsigned step = size; step > 0; step /= 2)
     {
-        bubble_sort_with_step(arr, size, step);
+        permutations += bubble_sort_with_step(arr, size, step);
     }
+
+    return permutations;
 }
 
 void insertion_sort_with_step(unsigned* arr, unsigned const size, unsigned step)

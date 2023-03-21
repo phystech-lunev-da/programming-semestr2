@@ -2,9 +2,9 @@
 #pragma once
 
 // бинарный поиск
-unsigned long binary_search(unsigned long* array, unsigned long size, unsigned long key)
+int binary_search(int* array, int size, int key)
 {
-    unsigned long left = 0, right = size, middle;
+    int left = 0, right = size, middle;
     
     while (left <= right)
     {
