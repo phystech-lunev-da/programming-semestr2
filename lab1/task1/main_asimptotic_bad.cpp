@@ -27,9 +27,9 @@ int main() {
 
     std::cout << "binary search bad" << std::endl;
 
-    int cnt = 20000;
+    int cnt = 1000;
 
-    for (int size = 10000; size < 1000000; size += 1000) {
+    for (int size = 100; size < 100000; size += 100) {
         int* array = generate_random_sorted_array(size, min, max); 
         auto begin = std::chrono::steady_clock::now();
         for (int j = 0; j < cnt; j++) {
@@ -41,7 +41,7 @@ int main() {
         
         file << size << " " << time_span << std::endl;
 
-        if (size % 10000 == 0)
+        if (size % 100 == 0)
         {
             std::cout << size << " " << time_span << std::endl;
         }
@@ -61,9 +61,9 @@ int main() {
 
     std::cout << "simple search bad" << std::endl;
 
-    cnt = 200;
+    cnt = 1000;
 
-    for (int size = 10000; size < 1000000; size += 1000) {
+    for (int size = 100; size < 100000; size += 100) {
         int* array = generate_random_array(size, min, max); 
         auto begin = std::chrono::steady_clock::now();
         for (int j = 0; j < cnt; j++) {
@@ -71,11 +71,11 @@ int main() {
             simple_search(array, size, key);
         }
         auto end = std::chrono::steady_clock::now();
-        auto time_span = std::chrono::duration_cast<std::chrono::nanoseconds>((end - begin)/cnt).count();
+        auto time_span = std::chrono::duration_cast<std::chrono::microseconds>((end - begin)/cnt).count();
         
         file << size << " " << time_span << std::endl;
 
-        if (size % 10000 == 0)
+        if (size % 100 == 0)
         {
             std::cout << size << " " << time_span << std::endl;
         }
