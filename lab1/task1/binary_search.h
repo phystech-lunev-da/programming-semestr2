@@ -2,13 +2,13 @@
 #pragma once
 
 // бинарный поиск
-int binary_search(int* array, int size, int key)
+long binary_search(long* array, long size, long key)
 {
-    int left = 0, right = size, middle;
+    unsigned long left = 0, right = size - 1, middle;
     
-    while (left <= right)
+    while ((left <= right) && (right < size))
     {
-        middle = (left + right) / 2;
+        middle = left + (right - left) / 2;
 
         if (array[middle] < key)
         {
@@ -23,9 +23,5 @@ int binary_search(int* array, int size, int key)
             return middle;
         }
     }
-    if ((left <= -1) || (right >= size) || (array[left] != key))
-    {
-        return -1;
-    }
-    return left;
+    return -1;
 }

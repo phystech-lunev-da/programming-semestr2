@@ -10,8 +10,6 @@
 
 int* max_sum_simple(int* array, int size, int key)
 {
-    int sum = std::numeric_limits<int>::min();
-
     int* result = new int[2]{-1, -1};
     for (int i = 0; i < size; i++)
     {
@@ -25,7 +23,6 @@ int* max_sum_simple(int* array, int size, int key)
             }
         }
     }
-
     return result;
 }
 
