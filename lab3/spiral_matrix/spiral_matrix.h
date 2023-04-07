@@ -3,14 +3,14 @@ int** spiral_matrix(int length)
 {
     int** matrix = new int*[length];
 
-    /*for (int i = 0; i < length; i++)
+    for (int i = 0; i < length; i++)
     {
         matrix[i] = new int[length];
         for (int j = 0; j < length; j++)
         {
             matrix[i][j] = 0;
         }
-    }*/
+    }
 
     int num = 1;
 

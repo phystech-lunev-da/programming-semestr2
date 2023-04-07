@@ -7,7 +7,10 @@
 
 int main()
 {
-    int length = 9;
+    int length;
+
+    std::cin >> length;
+
     int** matrix = spiral_matrix(length);
 
     for (int i = 0; i < length; i++)

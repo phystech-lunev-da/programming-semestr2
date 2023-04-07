@@ -1,8 +1,29 @@
 
+#include <cmath>
+
+double accuracy = pow(10, -6);
+
 bool LinearSolve(double** matrix, double* f, unsigned int n)
 {
     for (int i = 0; i < n; i++)
     {
+        if (abs(matrix[i][i]) <= accuracy)
+        {
+            // ищем элемент с ненулевым элементом
+            for (int j = i + 1; j < n; j++)
+            {
+                if (abs(matrix[j][i]) >= accuracy)
+                {
+                    // ЭПС: перестановка строк
+                    std::swap(f[i], f[j]);
+                    for (int k = n - 1; k >= 0; k--)
+                    {
+                        std::swap(matrix[i][k], matrix[j][k]);
+                    }
+                }
+            }
+        }
+
         double a = matrix[i][i];
 
         if (a == 0)
