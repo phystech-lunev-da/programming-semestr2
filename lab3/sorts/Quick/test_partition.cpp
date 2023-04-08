@@ -1,16 +1,18 @@
 
 #include <iostream>
-#include <iomanip>
+#include <cstdlib>
 #include <random>
-#include "merge_sort.h"
+#include <iomanip>
+
+#include "quick_sort.h"
 
 int main()
 {
-    int size = 1000;
+    int size = 10;
 
     std::default_random_engine generator(time(NULL));
 
-    int* array = new int[size];
+    int* array = new int[10];
 
     std::uniform_int_distribution<int> distribution(0, size);
 
@@ -23,28 +25,28 @@ int main()
 
     for (int i = 0; i < size; i++)
     {
-        std::cout << std::setw(3 + ceil(log10(size))) << i;
+        std::cout << std::setw(3) << i;
     }
     std::cout << std::endl;
 
     for (int i = 0; i < size; i++)
     {
-        std::cout << std::setw(3 + ceil(log10(size))) << array[i];
+        std::cout << std::setw(3) << array[i];
     }
 
     std::cout << std::endl;
 
-    merge_sort(array, size);
-    std::cout << "Sorted: " << std::endl;
+    int middle = partition(array, size);
+    std::cout << "Partition by index: " << middle << std::endl;
 
     for (int i = 0; i < size; i++)
     {
-        std::cout << std::setw(3 + ceil(log10(size))) << i;
+        std::cout << std::setw(3) << i;
     }
     std::cout << std::endl;
 
     for (int i = 0; i < size; i++)
     {
-        std::cout << std::setw(3 + ceil(log10(size))) << array[i];
+        std::cout << std::setw(3) << array[i];
     }
 }

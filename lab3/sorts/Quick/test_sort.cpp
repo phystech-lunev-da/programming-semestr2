@@ -1,8 +1,12 @@
 
+
 #include <iostream>
-#include <iomanip>
+#include <cstdlib>
 #include <random>
-#include "merge_sort.h"
+#include <iomanip>
+#include <cmath>
+
+#include "quick_sort.h"
 
 int main()
 {
@@ -34,7 +38,7 @@ int main()
 
     std::cout << std::endl;
 
-    merge_sort(array, size);
+    quick_sort(array, size);
     std::cout << "Sorted: " << std::endl;
 
     for (int i = 0; i < size; i++)
