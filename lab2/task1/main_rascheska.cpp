@@ -43,6 +43,7 @@ int main()
     }
     std::cout << std::endl;*/
 
+
     std::ofstream data;
 
     data.open("data_rascheska.csv");

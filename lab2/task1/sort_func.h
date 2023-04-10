@@ -5,6 +5,9 @@
 #include <cmath>
 #include <vector>
 
+
+// переставляет элементы
+// Можно использовать std::swap
 void swap(unsigned& a, unsigned& b)
 {
     a = a + b;
@@ -12,9 +15,12 @@ void swap(unsigned& a, unsigned& b)
     a = a - b;
 }
 
+// forward_step - шаг сортировки пузырьком в одну сторону
+// часть шейкерной сортировки
+// индекс проходит в промежутке [begin_idx, end_idx)
 void forward_step(
     unsigned* arr,
-    unsigned const begin_idx, 
+    unsigned const begin_idx,
     unsigned const end_idx
 )
 {
@@ -27,6 +33,9 @@ void forward_step(
     }
 }
 
+// backward_step - шаг сортировки пузырьком в противоположную сторону
+// часть шейкерной сортировки
+// индекс проходит в промежутке [begin_idx, end_idx)
 void backward_step(
     unsigned* arr,
     unsigned const begin_idx,
@@ -93,7 +102,7 @@ long rascheska_sort(
 
 void insertion_sort_with_step(unsigned* arr, unsigned const size, unsigned step)
 {
-    for (int i = 0; i + step < size; i++)
+    for (int i = 0; i < size; i++)
     {
         for (int j = i - step; j >= 0; j -= step)
         {
@@ -105,12 +114,12 @@ void insertion_sort_with_step(unsigned* arr, unsigned const size, unsigned step)
     }
 }
 
-std::vector<unsigned> get_geometry_numbers(unsigned n)
+std::vector<unsigned> get_geometry_numbers(unsigned size)
 {
-    std::vector<unsigned> geometry_numbers(n);
+    std::vector<unsigned> geometry_numbers(size);
 
-    unsigned d = n;
-    for (int i = 0; i < n; i++)
+    unsigned d = size;
+    for (int i = 0; i < size; i++)
     {
         geometry_numbers[i] = d;
         if (d > 1)
