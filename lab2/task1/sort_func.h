@@ -1,4 +1,10 @@
 
+
+
+// файл с сортировочными алгоритмами
+
+
+
 #pragma once
 
 #include <cstdlib>
@@ -51,6 +57,9 @@ void backward_step(
     }
 }
 
+
+// shaker_sort - шейкерная сортировка. Сортируем сначала в одну, а затем в другую сторону
+// индексы пробегают [begin_idx, end_idx)
 void shaker_sort(
     unsigned* arr,
     unsigned const begin_idx,
@@ -59,6 +68,7 @@ void shaker_sort(
 {
     unsigned first = begin_idx, last = end_idx;
 
+    // пока разность больше единицы (т.е. не пройдем весь массив)
     while (last - first > 1)
     {
         forward_step(arr, first, last);
@@ -68,13 +78,19 @@ void shaker_sort(
     }
 }
 
+
+// bubble_sort_with_step - сортируем элементы массива, 
+// находящиеся на расстоянии step друг от друга,
+// с помощью пузырьковой сортировки
+// часть сортировки расческой
 long bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const step)
 {
-    long permutations = 0;
+    long permutations = 0;  // число перестановок
     for (int i = 0; i + step < size; i++)
     {
         for (int j = 0; j + step < size - i; j += step)
         {
+            // если элементы в неправильном порядке, меняем местами
             if (arr[j] > arr[j + step])
             {
                 swap(arr[j], arr[j + step]);
@@ -86,6 +102,8 @@ long bubble_sort_with_step(unsigned* arr, unsigned const size, unsigned const st
     return permutations;
 }
 
+// сортировка расческой
+// по факту сортировка пузырьком с шагом, постепенно уменьшающейся до 1
 long rascheska_sort(
     unsigned* arr,
     unsigned const size
@@ -100,6 +118,9 @@ long rascheska_sort(
     return permutations;
 }
 
+
+// сортировка вставками с шагом step
+// часть сортировки Шелла
 void insertion_sort_with_step(unsigned* arr, unsigned const size, unsigned step)
 {
     for (int i = 0; i < size; i++)
@@ -114,6 +135,8 @@ void insertion_sort_with_step(unsigned* arr, unsigned const size, unsigned step)
     }
 }
 
+// создает массив шагов, являющихся геометрической прогрессией
+// часть соритровки Шелла
 std::vector<unsigned> get_geometry_numbers(unsigned size)
 {
     std::vector<unsigned> geometry_numbers(size);
@@ -131,10 +154,12 @@ std::vector<unsigned> get_geometry_numbers(unsigned size)
     return geometry_numbers;
 }
 
+// создает массив шагов, являющихся последовательностью Фибоначчи
+// часть сортировки Шелла
 std::vector<unsigned> get_fibonacchi_numbers(unsigned n)
 {
     std::vector<unsigned> fibonacchi_numbers(0);
-    fibonacchi_numbers.push_back(1);
+    fibonacchi_numbers.push_back(1); // push_bak добавляет элемент в массив
     fibonacchi_numbers.push_back(1);
 
     while (fibonacchi_numbers[fibonacchi_numbers.size() - 1] + fibonacchi_numbers[fibonacchi_numbers.size() - 2] <= n)
@@ -146,6 +171,7 @@ std::vector<unsigned> get_fibonacchi_numbers(unsigned n)
     return fibonacchi_numbers;
 }
 
+// создает массив шагов, являющихся последовательностью чисел Хиббарда (2^i - 1)
 std::vector<unsigned> get_hibbar_numbers(unsigned n)
 {
     unsigned max_index = floor(log2(n + 1));
