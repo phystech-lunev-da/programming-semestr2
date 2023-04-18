@@ -6,7 +6,7 @@
 
 int main()
 {
-    int size = 1000;
+    int size = 10000;
 
     std::default_random_engine generator(time(NULL));
 
@@ -21,10 +21,10 @@ int main()
 
     std::cout << "Array: " << std::endl;
 
-    for (int i = 0; i < size; i++)
+    /*for (int i = 0; i < size; i++)
     {
         std::cout << std::setw(3 + ceil(log10(size))) << i;
-    }
+    }*/
     std::cout << std::endl;
 
     for (int i = 0; i < size; i++)
@@ -37,14 +37,35 @@ int main()
     merge_sort(array, size);
     std::cout << "Sorted: " << std::endl;
 
-    for (int i = 0; i < size; i++)
+    /*for (int i = 0; i < size; i++)
     {
         std::cout << std::setw(3 + ceil(log10(size))) << i;
-    }
+    }*/
     std::cout << std::endl;
 
     for (int i = 0; i < size; i++)
     {
         std::cout << std::setw(3 + ceil(log10(size))) << array[i];
     }
+    std::cout << std::endl;
+
+    bool is_sorted = true;
+    
+    for (int i = 0; i < size - 1; i++)
+    {
+        is_sorted = is_sorted && (array[i] <= array[i + 1]);
+    }
+
+    if (is_sorted)
+    {
+        std::cout << "array is sorted" << std::endl;
+    }
+    else
+    {
+        std::cout << "array is not sorted" << std::endl;
+    }
+
+    delete[] array;
+
+    return 0;
 }
