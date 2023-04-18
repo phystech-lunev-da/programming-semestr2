@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for type in buffer array
+for type in buffer
 do
 
 file="${type}_asymptotic.csv"
@@ -12,7 +12,7 @@ done
 for ((i = 10; i <= 10000; i+=100))
 do
 
-for type in buffer array 
+for type in buffer 
 do
 
 file="${type}_asymptotic.csv"
