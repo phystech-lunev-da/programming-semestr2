@@ -71,17 +71,27 @@ LinkedList* remove_after(LinkedList * const current)
     return next_element;
 }
 
-void erase(LinkedList** head)
+void erase(LinkedList* head)
 {
-    if ((*head)->next != nullptr)
+    if (head->next != nullptr)
     {
-        erase((&(*head)->next));
-        (*head)->next = nullptr;
+        erase(head->next);
     }
 
-    delete *head;
-    *head = nullptr;
+    delete head;
+    head = nullptr;
     return;
+}
+
+void erase_itr(LinkedList* head)
+{
+    while (head)
+    {
+        LinkedList* temp = head->next;
+        delete head;
+        head = temp;
+    }
+    head = nullptr;
 }
 
 LinkedList* reverse_rec(LinkedList* head)

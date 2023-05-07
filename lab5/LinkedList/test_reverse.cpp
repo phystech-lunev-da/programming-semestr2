@@ -7,7 +7,7 @@
 
 int main()
 {
-    int size = 10;
+    int size = 100;
 
     LinkedList* head = create_list(size);
 

@@ -6,7 +6,7 @@ struct DynamicArray
     unsigned long long size = 0;
 };
 
-DynamicArray new_array(unsigned long size, long value = 0)
+DynamicArray* new_array(unsigned long size, long value = 0)
 {
     DynamicArray* array = new DynamicArray;
 
@@ -19,7 +19,7 @@ DynamicArray new_array(unsigned long size, long value = 0)
     {
         array->elements[i] = value;
     }
-    return *array;
+    return array;
 }
 
 void erase(DynamicArray& array)
