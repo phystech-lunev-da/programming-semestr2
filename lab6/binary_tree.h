@@ -1,6 +1,8 @@
 
 #pragma once
 #include <iostream>
+#include <string>
+#include <vector>
 
 struct binary_tree
 {
@@ -35,24 +37,26 @@ void add_node(binary_tree* source, binary_tree* target)
 {
     if (target->key > source->key)
     {
-        if (source->left != nullptr)
-        {
-            add_node(source->left, target);
-        }
-        else
-        {
-            source->left = target;
-        }
-    }
-    else if (target->key < source->key)
-    {
         if (source->right != nullptr)
         {
             add_node(source->right, target);
+            return;
         }
         else
         {
             source->right = target;
+        }
+    }
+    else if (target->key < source->key)
+    {
+        if (source->left != nullptr)
+        {
+            add_node(source->left, target);
+            return;
+        }
+        else
+        {
+            source->left = target;
         }
     }
 
@@ -65,22 +69,52 @@ void add_node(int key, binary_tree* source)
     add_node(source, target);
 }
 
-void display_tree(binary_tree* head, bool ascending = false)
+binary_tree* erase(binary_tree* tree)
 {
-    if (head == nullptr)
+    if (tree->left != nullptr)
     {
-        return;
+        tree->left = erase(tree->left);
     }
-    else if (ascending)
+    if (tree->right != nullptr)
     {
-        std::cout << "node = " << head->key << std::endl;
-        display_tree(head->left);
-        display_tree(head->right);
+        tree->right = erase(tree->right);
+    }
+    delete tree;
+    tree = nullptr;
+    return tree;
+}
+
+void display_tree(binary_tree* head, bool ascending = false, int moves = 0)
+{
+    static std::string indent = "--";
+
+    if (!ascending)
+    {
+        if (head->right != nullptr)
+        {
+            display_tree(head->right, ascending, moves + 1);
+        }
+        for (int i = 0; i < moves; i++)
+        {
+            std::cout << indent;
+        }
+        std::cout << head->key << "\n";
+        if (head->left != nullptr)
+        {
+            display_tree(head->left, ascending, moves + 1);
+        }
     }
     else
     {
-        display_tree(head->left);
-        display_tree(head->right);
-        std::cout << "node = " << head->key << std::endl;
+        if (head->right != nullptr)
+        {
+            display_tree(head->right, ascending, moves + 1);
+        }
+        std::cout << head->key << "\n";
+        std::cout << indent;
+        if (head->left != nullptr)
+        {
+            display_tree(head->left, ascending, moves + 1);
+        }
     }
 }
