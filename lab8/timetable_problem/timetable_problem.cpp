@@ -23,10 +23,12 @@ int main()
 
     std::sort(intervals, intervals + size, [&](Interval& a, Interval& b){return a.first < b.first || a.last < b.last;});
 
-    /*for (int i = 0; i < size; i++)
+    std::cout << std::endl;
+    for (int i = 0; i < size; i++)
     {
         std::cout << intervals[i].first << ":" << intervals[i].last << std::endl;
-    }*/
+    }
+    std::cout << std::endl;
 
     Interval* current = intervals;
 

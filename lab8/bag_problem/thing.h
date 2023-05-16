@@ -8,14 +8,19 @@ struct thing
     int w;
 };
 
+float p_m(thing& t)
+{
+    return (float)t.p / (float)t.w;
+}
+
 bool is_optim(thing& t1, thing& t2)
 {
-    return t1.p / t1.w < t2.p / t2.w;
+    return (p_m(t1)) > (p_m(t2));
 }
 
 void display(thing& t)
 {
-    std::cout << "{ p: " <<  t.p << ", w: " << t.w << " }" << std::endl;
+    std::cout << "{ p: " <<  t.p << ", w: " << t.w << ", p/w: " << p_m(t) << " }" << std::endl;
 }
 
 void display(int n, thing* t)

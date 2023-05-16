@@ -17,8 +17,11 @@ int main()
         std::cin >> things[i].p;
         std::cin >> things[i].w;
     }
+    std::cout << std::endl;
 
     std::sort(things, things + n, is_optim);
+
+    display(n, things);
 
     int current_weight = 0;
 
@@ -36,6 +39,7 @@ int main()
         fitted[i] = things[i];
     }
 
+    std::cout << std::endl;
     display(count, fitted);
 
     return 0;
