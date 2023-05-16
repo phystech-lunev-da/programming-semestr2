@@ -12,21 +12,32 @@ int main()
     add_node(17, tree);
     add_node(14, tree);
 
-    display_tree(tree, true);
     std::cout << std::endl;
     display_tree(tree, false);
 
+    // std::cout << std::endl;
+
+    // binary_tree* founded = find_node(tree, 15);
+
+    // if (founded)
+    //     std::cout << "node = " << founded->key << std::endl;
+    // else
+    //     std::cout << "node is not found" << std::endl;
+
+    display_in_right_order(tree, false);
+
     std::cout << std::endl;
 
-    binary_tree* founded = find_node(tree, 15);
+    display_in_right_order(tree, true);
 
-    if (founded)
-        std::cout << "node = " << founded->key << std::endl;
-    else
-        std::cout << "node is not found" << std::endl;
+    std::cout << std::endl;
+
+    // display_in_right_order_iter(tree);
+
+    std::cout << std::endl;
 
     delete tree;
-    delete founded;
+    // delete founded;
 
     return 0;
 }

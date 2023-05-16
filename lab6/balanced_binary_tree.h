@@ -118,7 +118,7 @@ void display_tree(balanced_binary_tree* head, bool ascending = false, int moves 
     }
 }
 
-balanced_binary_tree* left_rotate(balanced_binary_tree* head)
+balanced_binary_tree* right_rotate(balanced_binary_tree* head)
 {
     balanced_binary_tree* root = head;
     balanced_binary_tree* left = head->left;
@@ -139,10 +139,11 @@ balanced_binary_tree* left_rotate(balanced_binary_tree* head)
     head->right->left_height = height(head->right->left);
     head->right_height = height(head->right);
 
+
     return head;
 }
 
-balanced_binary_tree* right_rotate(balanced_binary_tree* head)
+balanced_binary_tree* left_rotate(balanced_binary_tree* head)
 {
     balanced_binary_tree* root = head;
     balanced_binary_tree* right = head->right;

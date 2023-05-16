@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include <stack>
+
 struct binary_tree
 {
     binary_tree *left, *right;
@@ -115,6 +117,65 @@ void display_tree(binary_tree* head, bool ascending = false, int moves = 0)
         if (head->left != nullptr)
         {
             display_tree(head->left, ascending, moves + 1);
+        }
+    }
+}
+
+void display_in_right_order(binary_tree* head, bool ascending = false)
+{
+    if (head->left == nullptr && head->right == nullptr)
+    {
+        std::cout << head->key << " ";
+        return;
+    }
+    if (ascending)
+    {
+        if (head->left != nullptr)
+        {
+            display_in_right_order(head->left, ascending);
+        }
+        std::cout << head->key << " ";
+        if (head->right != nullptr)
+        {
+            display_in_right_order(head->right, ascending);
+        }
+        return;
+    }
+    else
+    {
+        if (head->right != nullptr)
+        {
+            display_in_right_order(head->right, ascending);
+        }
+        std::cout << head->key << " ";
+        if (head->left != nullptr)
+        {
+            display_in_right_order(head->left, ascending);
+        }
+        return;
+    }
+}
+
+void display_in_right_order_iter(binary_tree* tree, bool ascending = false)
+{
+    std::stack<binary_tree*> bin_tree_stack;
+
+    bin_tree_stack.push(tree);
+
+    while (!bin_tree_stack.empty())
+    {
+        if (bin_tree_stack.top()->left != nullptr)
+        {
+            bin_tree_stack.push(bin_tree_stack.top()->left);
+            continue;
+        }
+        binary_tree* temp = bin_tree_stack.top();
+        bin_tree_stack.pop();
+        std::cout << temp->key << " ";
+        if (temp->right != nullptr)
+        {
+            bin_tree_stack.push(temp->right);
+            continue;
         }
     }
 }
